@@ -1,13 +1,32 @@
 import { bindTarget, context, drawTriangle, fit, loop, NOISE, program, reducedMotion, target, trackPointer } from '../shared/gl.js'
-import { skyAt } from '../shared/riso.js'
 
-// The sky from The Works, on its own: sun, cut-paper clouds and smoke, printed
+// The sky behind the page: sun, cut-paper clouds and smoke, printed
 // live as three spot inks through out-of-register halftone screens. It stays
 // behind the page, and the day passes as you scroll. The print itself (dots,
 // paper grain, ink skips) belongs to the page, so it scrolls with the content. A few stacks on the
 // horizon make the smoke. A moving cursor stirs the air: a small low-resolution
 // field gives the smoke it passes through some velocity, which coasts against
 // drag, rises with the smoke and fades. Nothing else in the sky reacts to it.
+
+const lerp = (a, b, k) => a + (b - a) * k
+const lerp3 = (a, b, k) => a.map((v, i) => lerp(v, b[i], k))
+
+// Times of day: blue, orange, yellow in the sky at top and at the horizon.
+const hours = [
+    { at: 0, top: [.02, .32, .3], low: [0, .62, .75], sun: [.72, .62], moon: 0, night: 0 },
+    { at: .3, top: [.34, 0, .05], low: [.06, .04, .34], sun: [.5, .14], moon: 0, night: 0 },
+    { at: .55, top: [.3, .14, .1], low: [0, .3, .6], sun: [.3, .28], moon: 0, night: 0 },
+    { at: .74, top: [.42, .62, .05], low: [0, .95, .55], sun: [.2, .72], moon: 0, night: .08 },
+    { at: .88, top: [1, .28, 0], low: [.62, .55, 0], sun: [.7, .22], moon: 1, night: .85 },
+    { at: 1, top: [1, .2, 0], low: [.85, .3, 0], sun: [.74, .18], moon: 1, night: 1 },
+]
+const skyAt = hour => {
+    let i = 0
+    while (i < hours.length - 2 && hour > hours[i + 1].at) i++
+    const a = hours[i], b = hours[i + 1]
+    const k = Math.min(1, Math.max(0, (hour - a.at) / (b.at - a.at)))
+    return { top: lerp3(a.top, b.top, k), low: lerp3(a.low, b.low, k), sun: [lerp(a.sun[0], b.sun[0], k), lerp(a.sun[1], b.sun[1], k)], moon: k > .5 ? b.moon : a.moon, night: lerp(a.night, b.night, k) }
+}
 
 const canvas = document.querySelector('#sky')
 const gl = context(canvas)

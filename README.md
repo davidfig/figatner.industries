@@ -10,8 +10,6 @@ The page sits on a live WebGL sky: a sun, clouds and smoke printed as three spot
 | --- | --- |
 | `designs/sky/` | The site's source: the page, the WebGL sky, images and self-hosted fonts |
 | `designs/shared/wordmark.js` | The hand-drawn letters, with their spacing and alignment |
-| `designs/logo/`, `designs/wordmark/` | Working pages for the logo and the lettering |
-| `designs/` (everything else) | Earlier design directions, kept for reference |
 | `scripts/build-site.mjs` | Builds the deployable site into `site/public` |
 | `site/` | Cloudflare config for the site |
 | `site/redirect/` | A small Worker that sends `www` and `figatnerindustries.com` to the main domain |
@@ -24,7 +22,7 @@ There's no install step. Serve `designs/` and open the Sky page. The page needs 
 python3 -m http.server 8090 --directory designs
 ```
 
-Then go to <http://localhost:8090/sky/>. `http://localhost:8090/` lists all the designs.
+Then go to <http://localhost:8090/sky/>.
 
 ## Build and deploy
 
@@ -42,5 +40,5 @@ The redirect Worker only needs deploying when its addresses change, with `cd sit
 The code is [MIT licensed](LICENSE). That license doesn't cover:
 
 - **Names, logos and the hand-drawn lettering.** The Figatner Industries, Golem Docs and satchel.email marks aren't licensed: see [TRADEMARKS.md](TRADEMARKS.md). That includes the logo drawing and letter outlines, even where they appear in source files.
-- **Product screenshots and images** in `designs/sky/img/` and `designs/thumbs/`.
+- **Product screenshots and images** in `designs/sky/img/`.
 - **Fonts** in `designs/sky/fonts/`, which keep their own [SIL Open Font License](designs/sky/fonts/OFL-Newsreader.txt).

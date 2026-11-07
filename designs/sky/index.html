@@ -165,9 +165,8 @@ footer > div > * { background: var(--ink); padding: 5px 9px; box-shadow: 3px 3px
 </footer>
 <script type="module">
 import { wordmarkSvg } from '../shared/wordmark.js'
-document.querySelector('h1 .drawn').innerHTML = wordmarkSvg(new URLSearchParams(location.search).get('w') || undefined)
+document.querySelector('h1 .drawn').innerHTML = wordmarkSvg()
 </script>
 <script type="module" src="./main.js"></script>
-<script type="module" src="../shared/bar.js"></script>
 </body>
 </html>
