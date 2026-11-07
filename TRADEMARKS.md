@@ -1,6 +1,6 @@
 # Trademarks
 
-"Figatner Industries", the figatner.industries and figatnerindustries.com domains, the Figatner Industries logo and its hand-drawn lettering are the marks of David Figatner. So are "Golem Docs", "satchel.email", "CoCo 2" and their logos and icons, which appear on this site.
+"Figatner Industries", the figatner.industries and figatnerindustries.com domains, the Figatner Industries logo and its hand-drawn lettering are the marks of David Figatner. So are "Golem Docs", "satchel.email", "CoCo 2", "Astronaut Geometry", "Sword Geometry" and their logos and icons, which appear on this site.
 
 The [MIT License](LICENSE) covers the code, not these marks. No license to them is granted, including where the logo drawing or letter outlines appear in source files, such as `designs/shared/wordmark.js`.
 
