@@ -40,5 +40,5 @@ The redirect Worker only needs deploying when its addresses change, with `cd sit
 The code is [MIT licensed](LICENSE). That license doesn't cover:
 
 - **Names, logos and the hand-drawn lettering.** The Figatner Industries, Golem Docs and satchel.email marks aren't licensed: see [TRADEMARKS.md](TRADEMARKS.md). That includes the logo drawing and letter outlines, even where they appear in source files.
-- **Product screenshots and images** in `designs/sky/img/`.
+- **Product screenshots and images** in `designs/sky/img/`, and the preview image and icon `designs/sky/og.jpg` and `apple-touch-icon.png`.
 - **Fonts** in `designs/sky/fonts/`, which keep their own [SIL Open Font License](designs/sky/fonts/OFL-Newsreader.txt).

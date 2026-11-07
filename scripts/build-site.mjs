@@ -24,6 +24,7 @@ writeFileSync(join(to, 'index.html'), html)
 const main = readFileSync(join(from, 'sky/main.js'), 'utf8')
 writeFileSync(join(to, 'main.js'), main.replaceAll("'../shared/", "'./shared/"))
 
+for (const file of ['404.html', 'robots.txt', 'sitemap.xml', 'og.jpg', 'apple-touch-icon.png']) cpSync(join(from, 'sky', file), join(to, file))
 for (const file of ['gl.js', 'wordmark.js']) cpSync(join(from, 'shared', file), join(to, 'shared', file))
 cpSync(join(from, 'sky/img'), join(to, 'img'), { recursive: true })
 cpSync(join(from, 'sky/fonts'), join(to, 'fonts'), { recursive: true })
