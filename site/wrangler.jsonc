@@ -1,0 +1,10 @@
+{
+    // A static site: Cloudflare serves public/ directly.
+    // Run `node scripts/build-site.mjs` from the project root before deploying.
+    "name": "figatner-industries",
+    "compatibility_date": "2026-11-01",
+    "routes": [{ "pattern": "figatner.industries", "custom_domain": true }],
+    "assets": {
+        "directory": "./public"
+    }
+}

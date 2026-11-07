@@ -1,0 +1,4 @@
+/* Self-hosted Latin subsets of Bricolage Grotesque and Newsreader (SIL OFL 1.1; see OFL-*.txt). */
+@font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 400 800; font-stretch: 75% 100%; font-display: swap; src: url('bricolage-grotesque-400-800.woff2') format('woff2'); }
+@font-face { font-family: 'Newsreader'; font-style: normal; font-weight: 400; font-display: swap; src: url('newsreader-400.woff2') format('woff2'); }
+@font-face { font-family: 'Newsreader'; font-style: normal; font-weight: 500; font-display: swap; src: url('newsreader-400.woff2') format('woff2'); }

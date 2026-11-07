@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Figatner Industries</title>
+<meta name="description" content="The company behind Golem Docs and satchel.email. Software that leaves your files yours.">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root { color-scheme: dark; }
+* { box-sizing: border-box; margin: 0; }
+html { background: #09090a; }
+body { color: #ddd6c6; font: 400 14px/1.5 'Barlow', system-ui, sans-serif; min-height: 100svh; position: relative; }
+canvas#board { position: fixed; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity .4s; }
+canvas#board.on { opacity: 1; }
+
+/* The words for screen readers and search, and the board's fallback. */
+.words { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.no-gl .words { position: static; width: auto; height: auto; clip-path: none; white-space: normal; padding: 28px; max-width: 42em; font-size: 18px; }
+.no-gl .words a { color: #ffb347; }
+.no-gl #links, .no-gl canvas { display: none; }
+
+/* Invisible real links laid over the board's rows. */
+#links a { position: absolute; display: block; color: transparent; font-size: 1px; overflow: hidden; border-radius: 3px; }
+#links a:focus-visible { outline: 2px solid #ffc14d; outline-offset: 1px; }
+
+.foot { position: absolute; left: 0; right: 0; display: flex; flex-wrap: wrap; gap: 4px 20px; align-items: center; color: #8f897c; font-size: 13px; padding-bottom: 60px; }
+.foot a { color: inherit; }
+.foot a:hover { color: #efe7d4; }
+.foot button { all: unset; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+.foot button:hover { color: #efe7d4; }
+.foot button:focus-visible { outline: 2px solid #ffc14d; outline-offset: 2px; }
+</style>
+</head>
+<body>
+<canvas id="board" aria-hidden="true"></canvas>
+<main class="words">
+    <h1>Figatner Industries</h1>
+    <p>The company behind Golem Docs and satchel.email. Software that leaves your files yours, made by one person in the Seattle area.</p>
+    <h2>Made here</h2>
+    <ul>
+        <li><a href="https://golemdocs.com" tabindex="-1">Golem Docs</a>: one editor for every kind of document. Word files, PDFs, spreadsheets, Markdown notes and drawings, as plain files in folders you choose. Out now, free and open source.</li>
+        <li><a href="https://satchel.email" tabindex="-1">satchel.email</a>: desktop email and calendar that keeps your mail on your own disk. AI agents can propose; nothing happens until you approve it. First release soon.</li>
+        <li><a href="https://github.com/pixijs-userland/pixi-viewport" tabindex="-1">pixi-viewport</a>: a 2D camera for pixi.js, maintained since 2017.</li>
+        <li><a href="https://yopeyopey.com/games/" tabindex="-1">Games</a>: eighteen games, most of them playable in your browser, and a text adventure for a 1986 computer on the bench.</li>
+    </ul>
+    <h2>Promises</h2>
+    <ol>
+        <li>What you keep here is yours. You can always get it out in open or documented formats. It's never sold, never used for advertising, and never used to train AI models without your permission.</li>
+        <li>The software works for you. It keeps working for the people using it, with your data on your own devices wherever a product's design allows.</li>
+        <li>The source stays open. Applications are published under open-source licenses, and the code stays available if the company stops working on a product.</li>
+        <li>No sudden endings. You get reasonable notice before a product or service you rely on ends, and a way to take your data with you.</li>
+    </ol>
+    <h2>Yearly report</h2>
+    <p>Every year the company publishes what it did toward those promises, where it fell short, and what comes next. The first report goes here after the first fiscal year closes.</p>
+    <h2>Family</h2>
+    <p><a href="https://yopeyopey.com" tabindex="-1">yopeyopey.com</a>: the person. <a href="https://sewcrates.com" tabindex="-1">sewcrates.com</a>: the writing, a blog since 2004.</p>
+</main>
+<nav id="links" aria-label="Board"></nav>
+<footer class="foot" id="foot">
+    <span>Figatner Industries LLC, Washington</span>
+    <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Trademarks</a>
+    <button type="button" id="sound" aria-pressed="false">Sound: off</button>
+</footer>
+<script type="module" src="./main.js"></script>
+<script type="module" src="../shared/bar.js"></script>
+</body>
+</html>

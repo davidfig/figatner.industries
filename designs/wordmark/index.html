@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Figatner Industries: lettering</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+<style>
+:root { --paper: #f4ecd9; --blue: #2746ad; --orange: #d9401a; --ink: #17183a; --soft: #55556b; color-scheme: light; }
+* { box-sizing: border-box; margin: 0; }
+body { background: var(--paper); color: var(--ink); font: 400 18px/1.45 'Newsreader', Georgia, serif; padding: clamp(18px, 4vw, 56px) clamp(16px, 4vw, 56px) 80px; max-width: 1400px; margin: 0 auto; }
+h1, h2 { font: 500 clamp(21px, 2vw, 27px)/1.2 'Newsreader', Georgia, serif; }
+h2 { margin: 38px 0 12px; }
+p { color: var(--soft); max-width: 44em; margin: 5px 0 16px; }
+#mark { display: block; width: min(100%, 980px); height: auto; color: var(--blue); overflow: visible; }
+#mark g { cursor: pointer; outline: none; }
+#mark g:hover path, #mark g:focus-visible path { fill: var(--orange); }
+#mark rect { fill: transparent; }
+.bar { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; align-items: center; }
+.bar a, .bar button { font: inherit; font-size: 16px; color: var(--blue); background: none; border: 2px solid var(--blue); padding: 5px 12px; text-decoration: none; cursor: pointer; }
+.bar a:hover, .bar button:hover { background: var(--blue); color: var(--paper); }
+#specimens { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+figure { border: 2px solid var(--blue); padding: 10px 10px 8px; }
+figure svg { display: block; width: 100%; height: 120px; color: var(--blue); }
+figcaption { font-size: 15px; color: var(--soft); margin-top: 4px; }
+figcaption b { color: var(--ink); font-weight: 500; }
+</style>
+</head>
+<body>
+<h1>Hand-drawn lettering</h1>
+<p>Every letter is drawn by hand, and its stems flare toward the base like the logo's stack. Click a letter that has another drawing to swap it. Then tell me what to change, like "the g's tail is too long" or "the second t is too thin."</p>
+<svg id="mark" role="group" aria-label="Figatner Industries wordmark"></svg>
+<div class="bar"><button type="button" id="reset">Reset</button><a id="see" href="../sky/">See it on the page</a></div>
+<h2>Every drawing</h2>
+<div id="specimens"></div>
+<script type="module">
+import { DEFAULT_CHOICES, LETTERS, LIGHT_LETTERS, SLOTS, VIEW, layout, letterSvg } from '../shared/wordmark.js'
+
+const mark = document.querySelector('#mark')
+const see = document.querySelector('#see')
+let choices = (new URLSearchParams(location.search).get('w') || DEFAULT_CHOICES).padEnd(SLOTS, '0').slice(0, SLOTS)
+
+function draw(focusSlot) {
+    const { placed, width, height } = layout(choices)
+    mark.setAttribute('viewBox', `0 ${-VIEW.TOP} ${width} ${height}`)
+    mark.innerHTML = placed.map(p => {
+        const swappable = p.options.length > 1
+        const a = swappable ? `tabindex="0" role="button" aria-label="${p.ch}: ${p.glyph.name}. Swap drawing."` : ''
+        return `<g data-slot="${p.slot}" ${a} transform="${p.transform}"><rect x="0" y="-700" width="${p.glyph.w}" height="900"/>${letterSvg(p)}</g>`
+    }).join('')
+    const query = choices === DEFAULT_CHOICES ? '' : `?w=${choices}`
+    see.href = `../sky/${query}`
+    history.replaceState(null, '', location.pathname + query)
+    if (focusSlot !== undefined) mark.querySelector(`[data-slot="${focusSlot}"]`)?.focus()
+}
+function swap(slot) {
+    const { placed } = layout(choices)
+    const p = placed[slot]
+    if (p.options.length < 2) return
+    const next = (p.choice + 1) % p.options.length
+    choices = choices.slice(0, slot) + next + choices.slice(slot + 1)
+    draw(slot)
+}
+mark.addEventListener('click', e => {
+    const g = e.target.closest('[data-slot]')
+    if (g) swap(Number(g.dataset.slot))
+})
+mark.addEventListener('keydown', e => {
+    const g = e.target.closest('[data-slot]')
+    if (g && (e.key === 'Enter' || e.key === ' ')) {
+        e.preventDefault()
+        swap(Number(g.dataset.slot))
+    }
+})
+document.querySelector('#reset').addEventListener('click', () => {
+    choices = DEFAULT_CHOICES
+    draw()
+})
+draw()
+
+document.querySelector('#specimens').innerHTML = [...Object.entries(LETTERS), ...Object.entries(LIGHT_LETTERS)].flatMap(([ch, options]) => options.map(o =>
+    `<figure><svg viewBox="-40 -720 ${o.w + 80} 940" aria-hidden="true"><path fill="currentColor" d="${o.d}"/></svg><figcaption><b>${ch}</b> ${o.name}</figcaption></figure>`)).join('')
+</script>
+<script type="module" src="../shared/bar.js"></script>
+</body>
+</html>

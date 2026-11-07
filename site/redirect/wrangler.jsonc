@@ -1,0 +1,11 @@
+{
+    "name": "figatner-industries-redirect",
+    "main": "index.js",
+    "compatibility_date": "2026-11-01",
+    "workers_dev": false,
+    "routes": [
+        { "pattern": "www.figatner.industries", "custom_domain": true },
+        { "pattern": "figatnerindustries.com", "custom_domain": true },
+        { "pattern": "www.figatnerindustries.com", "custom_domain": true }
+    ]
+}

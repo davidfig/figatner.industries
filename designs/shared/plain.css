@@ -1,0 +1,40 @@
+/* What Banner, Windows and Plant Menu have in common: printed paper, a plain nav
+   that's always there, and short sections. */
+:root {
+    --paper: #f4ecd9;
+    --blue: #2746ad;
+    --orange: #e8481c;
+    --ink: #17183a;
+    --soft: #4b4b63;
+    --gutter: clamp(16px, 4vw, 64px);
+    color-scheme: light;
+}
+* { box-sizing: border-box; margin: 0; }
+html { background: var(--paper); scroll-behavior: smooth; scroll-padding-top: 70px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { color: var(--ink); font: 400 clamp(16px, 1.15vw, 18px)/1.45 'Archivo', system-ui, sans-serif; }
+a { color: inherit; }
+a:focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }
+::selection { background: var(--orange); color: var(--paper); }
+
+.site-nav { position: sticky; top: 0; z-index: 10; background: var(--paper); border-bottom: 2px solid var(--blue); display: flex; justify-content: space-between; align-items: center; gap: 8px 20px; flex-wrap: wrap; padding: 10px var(--gutter); }
+.site-nav .name { font: 400 22px/1 'Anton', Impact, sans-serif; text-transform: uppercase; color: var(--blue); text-decoration: none; letter-spacing: .01em; }
+.site-nav nav { display: flex; gap: clamp(12px, 2vw, 26px); flex-wrap: wrap; font-weight: 600; font-size: 15px; }
+.site-nav nav a { text-decoration: none; padding: 4px 0; }
+.site-nav nav a:hover { color: var(--orange); }
+
+section { padding: clamp(36px, 6vh, 72px) var(--gutter); max-width: 1500px; margin: 0 auto; }
+h2 { font: 400 clamp(32px, 3.6vw, 52px)/1.05 'Anton', Impact, sans-serif; text-transform: uppercase; color: var(--blue); margin-bottom: 16px; letter-spacing: .005em; }
+.status { font-weight: 600; font-size: 13.5px; color: var(--orange); }
+
+.promises { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: 20px clamp(20px, 3vw, 40px); }
+.promises b { display: block; font: 400 clamp(20px, 1.7vw, 25px)/1.15 'Anton', Impact, sans-serif; text-transform: uppercase; color: var(--orange); margin-bottom: 4px; letter-spacing: .01em; }
+
+.split { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 30px clamp(30px, 5vw, 70px); border-top: 2px solid var(--blue); }
+.split p { max-width: 34em; }
+.family { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); gap: 10px; }
+.family a { display: block; border: 2px solid var(--blue); padding: 10px 12px; text-decoration: none; }
+.family a:hover { background: var(--blue); color: var(--paper); }
+.family b { display: block; font-size: 1.08em; }
+
+footer { border-top: 2px solid var(--blue); padding: 16px var(--gutter) 70px; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14px; color: var(--soft); }
